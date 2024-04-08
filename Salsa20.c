@@ -5,11 +5,11 @@
 
 // Define Salsa20 operations
 #define ROTL(a,b) (((a) << (b)) | ((a) >> (32 - (b)))) 
-#define QR(a, b, c, d)(    \    
-	b ^= ROTL(a + d, 7),   \ 
-    c ^= ROTL(b + a, 9),   \ 
-    d ^= ROTL(c + b,13),   \ 
-    a ^= ROTL(d + c,18))
+#define QR(a, b, c, d) \
+    b ^= ROTL(a + d, 7), \
+    c ^= ROTL(b + a, 9), \
+    d ^= ROTL(c + b, 13), \
+    a ^= ROTL(d + c, 18)
 
 // Salsa20 block function
 void salsa20_block(uint32_t out[16], uint32_t const in[16], uint32_t const key[8], uint32_t const nonce[2]) {
@@ -45,38 +45,40 @@ void salsa20_block(uint32_t out[16], uint32_t const in[16], uint32_t const key[8
         out[i] = x[i] + in[i];
 }
 
+// Validate input for key, nonce, and message
+int validate_input(uint32_t input[16]) {
+    for (int i = 0; i < 16; ++i) {
+        if (scanf("%u", &input[i]) != 1) {
+            printf("Invalid input. Please enter 16 integers.\n");
+            return 0; // Return 0 to indicate failure
+        }
+    }
+    return 1; // Return 1 to indicate success
+}
+
 // Driver function
 int main() {
-    uint32_t plaintext[16]; // Array to store plaintext
-    uint32_t ciphertext[16]; // Array to store ciphertext
-    uint32_t key[8]; // Array to store key
-    uint32_t nonce[2]; // Array to store nonce
+    uint32_t key[8];
+    uint32_t nonce[2];
+    uint32_t plaintext[16];
+    uint32_t ciphertext[16];
 
     // Prompt the user to enter the key
     printf("Enter 256-bit (8 integers) key:\n");
-    for (int i = 0; i < 8; ++i) {
-        if (scanf("%u", &key[i]) != 1) { // Read key input
-            printf("Invalid input.\n");
-            return 1;
-        }
+    if (!validate_input(key)) {
+        return 1; // Exit if input is invalid
     }
 
     // Prompt the user to enter the nonce
     printf("Enter 64-bit (2 integers) nonce:\n");
-    for (int i = 0; i < 2; ++i) {
-        if (scanf("%u", &nonce[i]) != 1) { // Read nonce input
-            printf("Invalid input.\n");
-            return 1;
-        }
+    if (!validate_input(nonce)) {
+        return 1; // Exit if input is invalid
     }
 
     // Prompt the user to enter the plaintext
     printf("Enter 64 bytes (16 integers) of plaintext:\n");
-    for (int i = 0; i < 16; ++i) {
-        if (scanf("%u", &plaintext[i]) != 1) { // Read plaintext input
-            printf("Invalid input.\n");
-            return 1;
-        }
+    if (!validate_input(plaintext)) {
+        return 1; // Exit if input is invalid
     }
 
     // Call the Salsa20 block function to encrypt the plaintext
