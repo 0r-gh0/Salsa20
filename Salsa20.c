@@ -46,10 +46,10 @@ void salsa20_block(uint32_t out[16], uint32_t const in[16], uint32_t const key[8
 }
 
 // Validate input for key, nonce, and message
-int validate_input(uint32_t input[16]) {
-    for (int i = 0; i < 16; ++i) {
+int validate_input(uint32_t input[16], int t) {
+    for (int i = 0; i < t; ++i) {
         if (scanf("%u", &input[i]) != 1) {
-            printf("Invalid input. Please enter 16 integers.\n");
+            printf("Invalid input. Please enter Correct Number of integers.\n");
             return 0; // Return 0 to indicate failure
         }
     }
@@ -65,19 +65,19 @@ int main() {
 
     // Prompt the user to enter the key
     printf("Enter 256-bit (8 integers) key:\n");
-    if (!validate_input(key)) {
+    if (!validate_input(key,8)) {
         return 1; // Exit if input is invalid
     }
 
     // Prompt the user to enter the nonce
     printf("Enter 64-bit (2 integers) nonce:\n");
-    if (!validate_input(nonce)) {
+    if (!validate_input(nonce,2)) {
         return 1; // Exit if input is invalid
     }
 
     // Prompt the user to enter the plaintext
     printf("Enter 64 bytes (16 integers) of plaintext:\n");
-    if (!validate_input(plaintext)) {
+    if (!validate_input(plaintext,16)) {
         return 1; // Exit if input is invalid
     }
 
