@@ -17,10 +17,10 @@ void salsa20_block(uint32_t out[16], uint32_t const in[16], uint32_t const key[8
     uint32_t x[16];
 
     // Set initial values based on Salsa20 specification
-    x[ 0] = 0x61707865; x[ 1] = key[0]; x[ 2] = key[1]; x[ 3] = key[2]; x[ 4] = key[3];
-    x[ 5] = 0x3320646e; x[ 6] = nonce[0]; x[ 7] = nonce[1]; x[ 8] = key[4]; x[ 9] = key[5];
-    x[10] = key[6]; x[11] = key[7]; x[12] = 0x79622d32; x[13] = 0x6b206574; x[14] = 0x6e65706f;
-    x[15] = 0x20202020;
+    x[ 0] = 0x61707865; x[ 1] = key[0]; x[ 2] = key[1]; x[ 3] = key[2]; 
+	x[ 4] = key[3]; x[ 5] = 0x3320646e; x[ 6] = nonce[0]; x[ 7] = nonce[1]; 
+	x[ 8] = key[4]; x[ 9] = key[5];  x[10] = key[6]; x[11] = key[7]; 
+	x[12] = 0x79622d32; x[13] = 0x6b206574; x[14] = 0x6e65706f; x[15] = 0x20202020;
 
     for (i = 0; i < 16; ++i)
         x[i] = in[i]; // Copy input to temporary array
