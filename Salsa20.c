@@ -12,7 +12,7 @@
     a ^= ROTL(d + c, 18)
 
 // Salsa20 block function
-void salsa20_block(uint32_t out[16], uint32_t const in[16], uint32_t const key[8], uint32_t const nonce[2]) {
+void salsa20_block(uint32_t out[16], uint32_t const in[16], uint32_t const key[8], uint32_t const nonce[2], char flag) {
     int i;
     uint32_t x[16];
     // Set initial counter values
@@ -39,9 +39,17 @@ void salsa20_block(uint32_t out[16], uint32_t const in[16], uint32_t const key[8
         QR(x[15], x[12], x[13], x[14]);
     }
 
-    // Add original input to the result
-    for (i = 0; i < 16; ++i)
-        out[i] = x[i] + in[i];
+    if (flag == 1){
+        // ENCRYPTION PART
+        for (i = 0; i < 16; ++i)
+            out[i] = x[i] + in[i];
+    }
+    else{
+        // DECRYPTION PART
+        for (i = 0; i < 16; ++i)
+            out[i] = in[i] - x[i];
+    }
+
 }
 
 // Validate input for key, nonce, and message
@@ -57,10 +65,11 @@ int validate_input(uint32_t input[16], int t) {
 
 // Driver function
 int main() {
+    char flag;
     uint32_t key[8];
     uint32_t nonce[2];
-    uint32_t plaintext[16];
-    uint32_t ciphertext[16];
+    uint32_t input[16];
+    uint32_t output[16];
 
     // Prompt the user to enter the key
     printf("Enter 256-bit (8 integers) key:\n");
@@ -74,19 +83,30 @@ int main() {
         return 1; // Exit if input is invalid
     }
 
-    // Prompt the user to enter the plaintext
-    printf("Enter 64 bytes (16 integers) of plaintext:\n");
-    if (!validate_input(plaintext,16)) {
-        return 1; // Exit if input is invalid
+    // Encrypt/Decrypt
+    printf("\nEnter 1 to Encrypt / 0 to Decrypt :");
+    if (scanf("%c", &flag) == 1) {
+        // Prompt the user to enter the Plaintext
+        printf("\nEnter 64 bytes (16 integers) of Plaintext:\n");
+        if (!validate_input(input,16)) {
+            return 1; // Exit if input is invalid
+        }
+    }
+    else{
+        // Prompt the user to enter the Ciphertext
+        printf("\nEnter 64 bytes (16 integers) of Ciphertext:\n");
+        if (!validate_input(input,16)) {
+            return 1; // Exit if input is invalid
+        }
     }
 
     // Call the Salsa20 block function to encrypt the plaintext
-    salsa20_block(ciphertext, plaintext, key, nonce);
+    salsa20_block(output, input, key, nonce, flag);
 
     // Display the ciphertext
-    printf("Ciphertext:\n");
+    printf("\nRESULT :\n");
     for (int i = 0; i < 16; ++i) {
-        printf("%u ", ciphertext[i]); // Output the ciphertext
+        printf("%u ", output[i]); // Output the ciphertext
     }
     printf("\n");
 
