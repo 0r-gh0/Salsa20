@@ -85,7 +85,8 @@ int main() {
 
     // Encrypt/Decrypt
     printf("\nEnter 1 to Encrypt / 0 to Decrypt :");
-    if (scanf("%c", &flag) == 1) {
+    scanf("%c", &flag);
+    if (flag == 1) {
         // Prompt the user to enter the Plaintext
         printf("\nEnter 64 bytes (16 integers) of Plaintext:\n");
         if (!validate_input(input,16)) {
