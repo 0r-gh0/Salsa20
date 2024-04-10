@@ -15,12 +15,14 @@
 void salsa20_block(uint32_t out[16], uint32_t const in[16], uint32_t const key[8], uint32_t const nonce[2]) {
     int i;
     uint32_t x[16];
+    // Set initial counter values
+    uint32_t counter[2] = {0, 0}; // For example, initialize with zeros
 
     // Set initial values based on Salsa20 specification
-    x[ 0] = 0x61707865; x[ 1] = key[0]; x[ 2] = key[1]; x[ 3] = key[2]; 
-	x[ 4] = key[3]; x[ 5] = 0x3320646e; x[ 6] = nonce[0]; x[ 7] = nonce[1];
-	x[ 8] = 0x6e65706f; x[ 9] = 0x20202020;  x[10] = 0x79622d32; x[11] = key[4]; 
-    x[ 12] = key[5]; x[ 13] = key[6]; x[14] = key[7];  x[15] = 0x6b206574;
+    x[ 0] = 0x61707865;     x[ 1] = key[0];     x[ 2] = key[1];     x[ 3] = key[2]; 
+	x[ 4] = key[3];         x[ 5] = 0x3320646e; x[ 6] = nonce[0];   x[ 7] = nonce[1];
+	x[ 8] = counter[0];     x[ 9] = counter[1]; x[10] = 0x79622d32; x[11] = key[4]; 
+    x[ 12] = key[5];        x[ 13] = key[6];    x[14] = key[7];     x[15] = 0x6b206574;
 
     for (i = 0; i < 16; ++i)
         x[i] = in[i]; // Copy input to temporary array
