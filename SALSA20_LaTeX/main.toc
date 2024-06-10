@@ -1,0 +1,26 @@
+\beamer@sectionintoc {1}{Rise of Salsa20}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Background}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{History}{4}{0}{1}
+\beamer@sectionintoc {2}{Overview}{5}{0}{2}
+\beamer@subsectionintoc {2}{1}{Agility of Salsa20}{6}{0}{2}
+\beamer@subsectionintoc {2}{2}{Speed}{7}{0}{2}
+\beamer@sectionintoc {3}{Salsa20 Specification}{8}{0}{3}
+\beamer@subsectionintoc {3}{1}{Initial State of $Salsa20$}{8}{0}{3}
+\beamer@subsectionintoc {3}{2}{The Quarterround function}{9}{0}{3}
+\beamer@subsubsectionintoc {3}{2}{1}{Diagram}{10}{0}{3}
+\beamer@subsectionintoc {3}{3}{The Rowround function}{11}{0}{3}
+\beamer@subsectionintoc {3}{4}{The Columnround function}{12}{0}{3}
+\beamer@subsectionintoc {3}{5}{The Doubleround function}{13}{0}{3}
+\beamer@subsectionintoc {3}{6}{The Littleendian function}{14}{0}{3}
+\beamer@subsectionintoc {3}{7}{The Expansion function}{15}{0}{3}
+\beamer@subsectionintoc {3}{8}{The Hash function}{16}{0}{3}
+\beamer@subsectionintoc {3}{9}{The Encryption function}{17}{0}{3}
+\beamer@sectionintoc {4}{C Implementation}{18}{0}{4}
+\beamer@sectionintoc {5}{Cryptanalysis on Salsa20}{19}{0}{5}
+\beamer@subsectionintoc {5}{1}{Brute Force Attacks}{19}{0}{5}
+\beamer@subsectionintoc {5}{2}{Hamming distance differential analysis}{20}{0}{5}
+\beamer@subsectionintoc {5}{3}{Differential analysis on QR function}{21}{0}{5}
+\beamer@subsectionintoc {5}{4}{Analysis on Salsa20’s PRG}{23}{0}{5}
+\beamer@sectionintoc {6}{The Invincible Salsa20}{24}{0}{6}
+\beamer@sectionintoc {7}{Conclusion}{25}{0}{7}
+\beamer@sectionintoc {8}{References}{26}{0}{8}
